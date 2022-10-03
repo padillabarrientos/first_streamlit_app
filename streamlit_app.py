@@ -54,9 +54,18 @@ except URLError as e:
 # write your own comment -what does the next line do? 
 
 # write your own comment - what does this do?
-fruit_choice2 = streamlit.text_input('What fruit would you like information about?','Now')
-streamlit.write('The user entered now', fruit_choice2)
+def insert_row_snowflake(new_fruit):
+  with my cnx.cursor as my_cur:
+    my_cur.execute("insert into fruit_load_list values('from streamlit')")
+    return 'Thanks for adding'+  new_fruit
 
+    
+add_my_fruit = streamlit.text_input('What fruit would you like information about?','?')
+
+if streamlit.button('Add Fruit to the list'):
+   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+   back_from_function=insert_row_snowflake(add_my_fruit)
+  streamlit.text(back_from_function)
 
 
 
