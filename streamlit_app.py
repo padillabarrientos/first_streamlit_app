@@ -1,13 +1,7 @@
 import snowflake.connector
 import streamlit
 
-my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-my_cur = my_cnx.cursor()
-my_cur.execute("insert into fruit_load_list values('from streamlit')")
-my_data_row = my_cur.fetchall()
-streamlit.header("LISTA")
-streamlit.dataframe(my_data_row)
-streamlit.text(my_data_row)
+
 
 
 streamlit.title('My Parents New Healthy Dinner')
@@ -34,3 +28,10 @@ fruityvice_normalized=pandas.json_normalize(fruityvice_response.json())
 streamlit.dataframe(fruityvice_normalized)
 fruit_choice2 = streamlit.text_input('What fruit would you like information about?','Now')
 streamlit.write('The user entered now', fruit_choice2)
+my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+my_cur = my_cnx.cursor()
+my_cur.execute("insert into fruit_load_list values('from streamlit')")
+my_data_row = my_cur.fetchall()
+streamlit.header("LISTA")
+streamlit.dataframe(my_data_row)
+streamlit.text(my_data_row)
